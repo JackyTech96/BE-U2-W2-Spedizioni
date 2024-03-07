@@ -1,0 +1,23 @@
+﻿@model int
+
+@{
+    ViewBag.Title = "NumeroTotaleSpedizioniInAttesa";
+}
+
+<h2>Numero Totale Spedizioni In Attesa</h2>
+
+<p>Il numero totale di spedizioni in attesa di consegna è: <span id="numeroTotale">@Model</span></p>
+
+@Html.ActionLink("Torna alla lista", "Index", "Spedizione",null, new { @class = "btn btn-primary" })
+
+
+<script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
+<script>
+    // Non è necessario cambiare il dataType in "json" qui, poiché stai passando direttamente il numero alla vista
+    $(document).ready(function () {
+        // La vista renderizzata conterrà già il numero nel modello
+        // quindi puoi accedervi direttamente senza una chiamata AJAX aggiuntiva
+        var numeroTotale = @Html.Raw(Json.Encode(Model));
+        $("#numeroTotale").html(numeroTotale);
+    });
+</script>

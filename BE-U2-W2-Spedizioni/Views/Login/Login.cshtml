@@ -1,0 +1,46 @@
+﻿@model BE_U2_W2_Spedizioni.Models.Utente
+
+@{
+    ViewBag.Title = "Login";
+}
+
+<h2>Login</h2>
+
+<div class="container mt-5">
+    <div class="row justify-content-center">
+        <div class="col-md-6">
+            <div class="card">
+                <div class="card-header">Login</div>
+                <div class="card-body">
+                    @if (ViewBag.AuthError != null)
+                    {
+                        <div class="alert alert-danger" role="alert">
+                            @ViewBag.AuthError
+                        </div>
+                    }
+
+                    @using (Html.BeginForm("Login", "Login", FormMethod.Post, new { @class = "needs-validation", novalidate = "true" }))
+                    {
+                        <div class="mb-3">
+                            @Html.LabelFor(model => model.Username, new { @class = "form-label" })
+                            @Html.TextBoxFor(model => model.Username, new { @class = "form-control", required = "true" })
+                            <div class="invalid-feedback">
+                                Please enter your username.
+                            </div>
+                        </div>
+
+                        <div class="mb-3">
+                            @Html.LabelFor(model => model.Password, new { @class = "form-label" })
+                            @Html.PasswordFor(model => model.Password, new { @class = "form-control", required = "true" })
+                            <div class="invalid-feedback">
+                                Please enter your password.
+                            </div>
+                        </div>
+
+                        <button type="submit" class="btn btn-primary">Login</button>
+                    }
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

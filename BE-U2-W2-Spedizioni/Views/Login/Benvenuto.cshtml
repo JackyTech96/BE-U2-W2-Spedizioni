@@ -1,0 +1,18 @@
+﻿@model BE_U2_W2_Spedizioni.Models.Utente
+
+@{
+    ViewBag.Title = "Benvenuto";
+}
+
+<div class="container">
+    <div class="row">
+        <div class="col-md-6 offset-md-3">
+            <h2 class="text-center mt-5 mb-4">Benvenuto</h2>
+            <p class="text-center">Grazie per aver effettuato l'accesso!</p>
+            <p class="text-center">Questo è il tuo spazio personale dopo il login.</p>
+        </div>
+    </div>
+</div>
+
+@Html.ActionLink("Logout", "Logout", "Login", new { @class = "btn btn-primary" })
+

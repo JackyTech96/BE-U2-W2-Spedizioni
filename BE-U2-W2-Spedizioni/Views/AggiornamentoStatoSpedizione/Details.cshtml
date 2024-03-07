@@ -1,0 +1,28 @@
+﻿@model BE_U2_W2_Spedizioni.Models.AggiornamentoStatoSpedizione
+
+@{
+    ViewBag.Title = "Dettagli Aggiornamento";
+}
+
+<h2>Dettagli Aggiornamento</h2>
+
+<dl class="dl-horizontal">
+    <dt>ID Spedizione</dt>
+    <dd>@Model.IDSpedizione</dd>
+
+    <dt>Stato</dt>
+    <dd>@Model.Stato</dd>
+
+    <dt>Luogo</dt>
+    <dd>@Model.Luogo</dd>
+
+    <dt>Descrizione Eventuale</dt>
+    <dd>@Model.DescrizioneEventuale</dd>
+
+    <dt>Data Aggiornamento</dt>
+    <dd>@Model.DataAggiornamento</dd>
+</dl>
+
+<p>
+    @Html.ActionLink("Torna alla Lista", "Index", "Spedizione")
+</p>

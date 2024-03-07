@@ -1,0 +1,113 @@
+﻿@model BE_U2_W2_Spedizioni.Models.Cliente
+
+@{
+    ViewBag.Title = "Create";
+}
+
+<h2>Create</h2>
+
+@if (ViewBag.msgErrore != null)
+{
+    <div class="alert alert-danger fw-bold text-danger my-3" role="alert">
+        @ViewBag.msgErrore
+    </div>
+}
+@if (ViewBag.msgSuccess != null)
+{
+    <div class="alert alert-success fw-bold text-success my-3" role="alert">
+        @ViewBag.msgSuccess
+    </div>
+}
+
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+
+    <div class="form-horizontal">
+        <h4>Cliente</h4>
+        <hr />
+        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+        <div class="form-group">
+            @Html.LabelFor(model => model.Nome, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.Nome, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.Nome, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.Cognome, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.Cognome, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.Cognome, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group" id="CodiceFiscale">
+            @Html.LabelFor(model => model.CodiceFiscale, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.CodiceFiscale, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.CodiceFiscale, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group" id="PartitaIVA">
+            @Html.LabelFor(model => model.PartitaIVA, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.PartitaIVA, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.PartitaIVA, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.TipoCliente, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.DropDownList("TipoCliente", new SelectList(new List<Object>
+                     {
+                         new { value = "", text = "Scegli tipo cliente", disabled = "disabled", selected = "selected" },
+                         new { value = "Privato", text = "Privato" },
+                         new { value = "Azienda", text = "Azienda" }
+                     }, "value", "text"), htmlAttributes: new { @class = "form-control" })
+                @Html.ValidationMessageFor(model => model.TipoCliente, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            <div class="col-md-offset-2 col-md-10">
+                <input type="submit" value="Create" class="btn btn-default" />
+            </div>
+        </div>
+    </div>
+}
+
+<div>
+    @Html.ActionLink("Back to List", "Index")
+</div>
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+
+    <script>
+        document.addEventListener("DOMContentLoaded", function () {
+            // Nascondi inizialmente il campo Codice Fiscale e Partita IVA
+            document.getElementById('CodiceFiscale').closest('.form-group').style.display = 'none';
+            document.getElementById('PartitaIVA').closest('.form-group').style.display = 'none';
+
+            // Gestisci il cambiamento nel campo TipoCliente
+            document.getElementById('TipoCliente').addEventListener('change', function () {
+                var selectedTipoCliente = this.value;
+
+                // Nascondi entrambi i campi
+                document.getElementById('CodiceFiscale').closest('.form-group').style.display = 'none';
+                document.getElementById('PartitaIVA').closest('.form-group').style.display = 'none';
+
+                // Mostra il campo appropriato in base al tipo di cliente selezionato
+                if (selectedTipoCliente === 'Privato') {
+                    document.getElementById('CodiceFiscale').closest('.form-group').style.display = 'block';
+                } else if (selectedTipoCliente === 'Azienda') {
+                    document.getElementById('PartitaIVA').closest('.form-group').style.display = 'block';
+                }
+            });
+        });
+    </script>
+}

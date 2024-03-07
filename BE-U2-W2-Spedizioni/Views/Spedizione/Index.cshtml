@@ -1,0 +1,70 @@
+﻿@model IEnumerable<BE_U2_W2_Spedizioni.Models.Spedizione>
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<div class="container mt-4">
+
+    <div class="d-flex justify-content-around">
+        <h2>Lista Spedizioni</h2>
+
+        <div class="btn-group mb-3 ml-3" role="group">
+            @Html.ActionLink("Consegne Oggi", "ConsegnaOdierna", "Spedizione", new { @class = "btn btn-dark" })
+            @Html.ActionLink("Spedizioni In Attesa", "NumeroTotaleSpedizioniInAttesa", "AggiornamentoStatoSpedizione", null, new { @class = "btn btn-dark" })
+            @Html.ActionLink("Numero Spedizioni Per Città", "NumeroTotaleSpedizioniCitta", "Spedizione", new { @class = "btn btn-dark" })
+        </div>
+    </div>
+   
+
+
+
+
+
+    <table class="table table-striped">
+        <thead>
+            <tr>
+                <th>@Html.DisplayNameFor(model => model.IDSpedizione)</th>
+                <th>@Html.DisplayNameFor(model => model.IDCliente)</th>
+                <th>@Html.DisplayNameFor(model => model.NumeroIdentificativo)</th>
+                <th>@Html.DisplayNameFor(model => model.DataSpedizione)</th>
+                <th>@Html.DisplayNameFor(model => model.Peso)</th>
+                <th>@Html.DisplayNameFor(model => model.Citta)</th>
+                <th>@Html.DisplayNameFor(model => model.Indirizzo)</th>
+                <th>@Html.DisplayNameFor(model => model.NominativoDestinatario)</th>
+                <th>@Html.DisplayNameFor(model => model.CostoSpedizione)</th>
+                <th>@Html.DisplayNameFor(model => model.DataConsegnaPrevista)</th>
+                <th></th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <td>@Html.DisplayFor(modelItem => item.IDSpedizione)</td>
+                    <td>@Html.DisplayFor(modelItem => item.IDCliente)</td>
+                    <td>@Html.DisplayFor(modelItem => item.NumeroIdentificativo)</td>
+                    <td>@Html.DisplayFor(modelItem => item.DataSpedizione)</td>
+                    <td>@Html.DisplayFor(modelItem => item.Peso)</td>
+                    <td>@Html.DisplayFor(modelItem => item.Citta)</td>
+                    <td>@Html.DisplayFor(modelItem => item.Indirizzo)</td>
+                    <td>@Html.DisplayFor(modelItem => item.NominativoDestinatario)</td>
+                    <td>@Html.DisplayFor(modelItem => item.CostoSpedizione)</td>
+                    <td>@Html.DisplayFor(modelItem => item.DataConsegnaPrevista)</td>
+                    <td>
+                        <div class="btn-group" role="group">
+                            @Html.ActionLink("Dettagli", "Details", "AggiornamentoStatoSpedizione", new { id = item.IDSpedizione }, new { @class = "btn btn-outline-dark btn-sm" })
+                            @Html.ActionLink("Modifica", "Edit", new { id = item.IDSpedizione }, new { @class = "btn btn-outline-dark btn-sm" })
+                            @Html.ActionLink("Elimina", "Delete", new { id = item.IDSpedizione }, new { @class = "btn btn-outline-dark btn-sm" })
+                        </div>
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+
+    <div class="text-center">
+        <!-- Aggiunto il wrapper con la classe text-center -->
+        @Html.ActionLink("Aggiungi spedizione", "Create", null, new { @class = "btn btn-success" })
+    </div>
+</div>

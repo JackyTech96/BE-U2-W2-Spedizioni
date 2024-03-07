@@ -1,0 +1,60 @@
+﻿@model IEnumerable<BE_U2_W2_Spedizioni.Models.Cliente>
+
+@{
+    ViewBag.Title = "Lista Clienti";
+}
+
+<div class="container mt-5">
+    <h2 class="mb-4">Lista Clienti</h2>
+
+    @if (ViewBag.msgErrore != null)
+    {
+        <div class="alert alert-danger fw-bold my-3" role="alert">
+            @ViewBag.msgErrore
+        </div>
+    }
+    @if (ViewBag.msgSuccess != null)
+    {
+        <div class="alert alert-success fw-bold my-3" role="alert">
+            @ViewBag.msgSuccess
+        </div>
+    }
+
+    <p>
+        <a href="@Url.Action("Create")" class="btn btn-secondary">Aggiungi Cliente</a>
+    </p>
+
+    <table class="table table-striped">
+        <thead>
+            <tr>
+                <th>ID Cliente</th>
+                <th>Nome</th>
+                <th>Cognome</th>
+                <th>Codice Fiscale</th>
+                <th>Partita IVA</th>
+                <th>Tipo Cliente</th>
+                <th>Azioni</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <td>@Html.DisplayFor(modelItem => item.IDCliente)</td>
+                    <td>@Html.DisplayFor(modelItem => item.Nome)</td>
+                    <td>@Html.DisplayFor(modelItem => item.Cognome)</td>
+                    <td>@Html.DisplayFor(modelItem => item.CodiceFiscale)</td>
+                    <td>@Html.DisplayFor(modelItem => item.PartitaIVA)</td>
+                    <td>@Html.DisplayFor(modelItem => item.TipoCliente)</td>
+                    <td>
+                        <div class="btn-group" role="group">
+                            <a href="@Url.Action("Details", new { id = item.IDCliente })" class="btn btn-outline-dark btn-sm">Dettagli</a>
+                            <a href="@Url.Action("Edit", new { id = item.IDCliente })" class="btn btn-outline-dark btn-sm">Modifica</a>
+                            <a href="@Url.Action("Delete", new { id = item.IDCliente })" class="btn btn-outline-dark btn-sm">Elimina</a>
+                        </div>
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+</div>

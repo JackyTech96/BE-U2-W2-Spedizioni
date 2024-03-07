@@ -1,0 +1,77 @@
+﻿@model List<BE_U2_W2_Spedizioni.Models.Spedizione>
+
+@{
+    ViewBag.Title = "ConsegnaOdierna";
+}
+
+<h2>ConsegnaOdierna</h2>
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>ID Spedizione</th>
+            <th>ID Cliente</th>
+            <th>Data Spedizione</th>
+            <th>Peso</th>
+            <th>Città</th>
+            <th>Indirizzo</th>
+            <th>Nominativo Destinatario</th>
+            <th>Costo Spedizione</th>
+            <th>Data Consegna Prevista</th>
+        </tr>
+    </thead>
+    <tbody>
+        <!-- Riempi questa sezione con i risultati della chiamata AJAX -->
+        @foreach (var spedizione in Model)
+        {
+            <tr>
+                <td>@spedizione.IDSpedizione</td>
+                <td>@spedizione.IDCliente</td>
+                <td>@spedizione.DataSpedizione.ToShortDateString()</td>
+                <td>@spedizione.Peso</td>
+                <td>@spedizione.Citta</td>
+                <td>@spedizione.Indirizzo</td>
+                <td>@spedizione.NominativoDestinatario</td>
+                <td>@spedizione.CostoSpedizione</td>
+                <td>@spedizione.DataConsegnaPrevista.ToShortDateString()</td>
+            </tr>
+        }
+    </tbody>
+</table>
+
+@Html.ActionLink("Torna alla lista", "Index", "Spedizione", new { @class = "btn btn-primary" })
+
+
+<script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
+<script>
+    $.ajax({
+        type: "GET",
+        url: "/Spedizione/ConsegnaOdierna",
+        dataType: "json",
+        success: function (result) {
+            // Aggiorna l'interfaccia utente con i risultati ottenuti
+            var tableBody = $("table tbody");
+            tableBody.empty(); // Svuota la tabella prima di aggiungere nuove righe
+
+            $.each(result, function (index, spedizione) {
+                // Aggiungi una nuova riga per ogni spedizione
+                var row = "<tr>" +
+                    "<td>" + spedizione.IDSpedizione + "</td>" +
+                    "<td>" + spedizione.IDCliente + "</td>" +
+                    "<td>" + spedizione.DataSpedizione + "</td>" +
+                    "<td>" + spedizione.Peso + "</td>" +
+                    "<td>" + spedizione.Citta + "</td>" +
+                    "<td>" + spedizione.Indirizzo + "</td>" +
+                    "<td>" + spedizione.NominativoDestinatario + "</td>" +
+                    "<td>" + spedizione.CostoSpedizione + "</td>" +
+                    "<td>" + spedizione.DataConsegnaPrevista + "</td>" +
+                    "</tr>";
+
+                tableBody.append(row);
+            });
+        },
+        error: function (error) {
+            console.error("Errore durante la chiamata AJAX: " + error.statusText);
+        }
+    });
+</script>
